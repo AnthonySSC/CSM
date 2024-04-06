@@ -140,16 +140,6 @@ namespace CSM.Commands.Handler.Internal
 
             // Check that no other player is currently connecting
             bool clientJoining = MultiplayerManager.Instance.CurrentServer.ConnectedPlayers.Values.Any(p => p.Status != ClientStatus.Connected);
-            if (clientJoining)
-            {
-                Log.Info("Connection rejected: A client is already joining.");
-                CommandInternal.Instance.SendToClient(peer, new ConnectionResultCommand
-                {
-                    Success = false,
-                    Reason = "A client is already joining"
-                });
-                return;
-            }
 
             // Add the new player as a connected player
             CSMPlayer newPlayer = new CSMPlayer(peer, command.Username);
